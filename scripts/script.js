@@ -350,6 +350,10 @@ colorBook.init = function() {
   this.assignPage(this.pages[0]);
   this.drawCanvas();
 
+  // This will make these radio buttons the default even after a refresh.
+  $("#page1").prop("checked", true);
+  $("#a").prop("checked", true);
+
   console.log(this.canvas);
 
   // When a pixel is clicked, call the fill method using the selected indices.
