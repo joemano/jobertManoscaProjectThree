@@ -342,6 +342,25 @@ colorBook.assignPage = function(page) {
   });
 }
 
+// Check if all pixels on the canvas are filled.
+colorBook.checkPageComplete = function() {
+  const allFills = this.canvas.map(function(row) {
+    const filledPixels = row.filter(function(pixel) {
+      return pixel.isFilled;
+    });
+    return filledPixels.length;
+  });
+
+  const numberOfFilled = allFills.reduce(function(accumulator, currentValue) {
+    return accumulator + currentValue;
+  }, 0);
+
+  console.log(numberOfFilled, "out of " + (this.sizeX * this.sizeY));
+  if(numberOfFilled === (this.sizeX * this.sizeY)) {
+    return true;
+  }
+}
+
 // Put everything together
 colorBook.init = function() {
 
@@ -359,6 +378,8 @@ colorBook.init = function() {
   // When a pixel is clicked, call the fill method using the selected indices.
   $(".pixel").click(function() {
 
+    let successfulMatch = false;
+
     // parseInt() is used because attr() is returning a string when it needs a number.
     const $selectedX = parseInt($(this).attr("data-rowIndex"));
     const $selectedY = parseInt($(this).attr("data-columnIndex"));
@@ -366,7 +387,17 @@ colorBook.init = function() {
 
     console.log($selectedX, $selectedY, $selectedColor);
 
+    if(colorBook.canvas[$selectedY][$selectedX].colorIndex === $selectedColor && !colorBook.canvas[$selectedY][$selectedX].isFilled){
+      successfulMatch = true;
+    }
+
     colorBook.fill($selectedX, $selectedY, $selectedColor);
+
+    if(successfulMatch) {
+      if(colorBook.checkPageComplete()){
+        alert("This image be done.");
+      }
+    }
 
   });
 
