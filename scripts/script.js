@@ -1,6 +1,8 @@
 const colorBook = {};
 
 colorBook.canvas = [];
+
+// Color indices of all pages in the book
 colorBook.pages = [
 // Page 1
 [
@@ -212,9 +214,11 @@ colorBook.pages = [
 
 ];
 
+// Dimensions of the canvas
 colorBook.sizeX = 37;
 colorBook.sizeY = 22;
 
+// Pixel object contains vital information for the logic of the app
 colorBook.pixel = {
   rowIndex: 0,
   columnIndex: 0,
@@ -222,28 +226,38 @@ colorBook.pixel = {
   isFilled: true
 }
 
+// Build a canvas model for the app to work with.
 colorBook.buildCanvas = function() {
   for(let i = 0; i < this.sizeY; i++) {
+    // Y axis represents how many rows the canvas will have.
+    // On the construction of the canvas we're putting in a new array to represent each row.
     this.canvas.push([]);
     for(let j = 0; j < this.sizeX; j++) {
+      // X axis represents how many columns the canvas will have.
+      // Here we assign a pixel to the row for every column the canvas has.
       this.canvas[i].push(Object.assign({}, this.pixel));
+
+      // This assigns the position of each pixel as it goes through the loop.
       this.canvas[i][j].rowIndex = j;
       this.canvas[i][j].columnIndex = i;
-      this.canvas[i][j].colorIndex = Math.floor(Math.random() * 3);
     }
   }
 };
 
+// This function builds the bridge for the model and the interface that the user can see.
 colorBook.drawCanvas = function() {
-  colorBook.canvas.forEach(function(row) {
+  this.canvas.forEach(function(row) {
     row.forEach(function(pixel) {
+      // Put the pixels on the canvas with their appropriate indices for position and color.
       $(".canvas").append(`<div class="pixel ${pixel.colorIndex} notFilled" data-rowIndex=${pixel.rowIndex} data-columnIndex=${pixel.columnIndex}><p>${pixel.colorIndex}</p></div>`);
     })
   });
 
+  // This hides the text for pixels with a blank(represented as 'Z') color index.
   $(".Z p").addClass("hidden");
 };
 
+// This function is used to reassign indices to the interface whenever there's a change to the canvas model
 colorBook.redrawCanvas = function() {
   colorBook.canvas.forEach(function(row) {
     row.forEach(function(pixel) {
@@ -251,9 +265,11 @@ colorBook.redrawCanvas = function() {
     })
   });
 
+  // Again, hide the text for blank indices.
   $(".Z p").addClass("hidden");
 };
 
+// Basic flood fill algorithm
 // colorBook.fill = function(x, y, colorToChange, newColor) {
 //   if(x < 0 || y < 0 || x >= colorBook.sizeX || y >= colorBook.sizeY) {
 //     return;
@@ -279,21 +295,28 @@ colorBook.redrawCanvas = function() {
 //   this.fill(x - 1, y + 1, colorToChange, newColor);
 // };
 
+// Modified flood fill algorithm  to better suit the functionality of the app
 colorBook.fill = function(x, y, selectedColor) {
+
+  // Check if the target pixel is outside the boundaries of the canvas
   if(x < 0 || y < 0 || x >= colorBook.sizeX || y >= colorBook.sizeY) {
     return;
   }
 
+  // Check if the user's selected color matches the color index of the selected pixel.
+  // Also check if that pixel has already been filled.
   if(this.canvas[y][x].colorIndex !== selectedColor || this.canvas[y][x].isFilled){
     return;
   }
 
+  // Fill the target pixel and hide the text
   this.canvas[y][x].isFilled = true;
   const $selectedPixel = $(`.pixel[data-rowIndex=${x}][data-columnIndex=${y}]`);
 
   $selectedPixel.removeClass("notFilled");
   $selectedPixel.find("p").addClass("hidden");
 
+  // Call the function again for adjacent pixels.
   this.fill(x - 1, y, selectedColor);
   this.fill(x - 1, y - 1, selectedColor);
   this.fill(x, y - 1, selectedColor);
@@ -304,10 +327,12 @@ colorBook.fill = function(x, y, selectedColor) {
   this.fill(x - 1, y + 1, selectedColor);
 };
 
+// Assigns the color indices to the canvas with the selected page
 colorBook.assignPage = function(page) {
   page.forEach(function(row, i) {
     row.forEach(function(pageColorIndex, j) {
       colorBook.canvas[i][j].colorIndex = pageColorIndex;
+      // Make blanks treated as being already filled.
       if(pageColorIndex === 'Z') {
         colorBook.canvas[i][j].isFilled = true;
       } else {
@@ -317,14 +342,20 @@ colorBook.assignPage = function(page) {
   });
 }
 
+// Put everything together
 colorBook.init = function() {
+
+  // Build the default canvas and draw it. Starts at the first page by default.
   this.buildCanvas();
   this.assignPage(this.pages[0]);
   this.drawCanvas();
 
   console.log(this.canvas);
 
+  // When a pixel is clicked, call the fill method using the selected indices.
   $(".pixel").click(function() {
+
+    // parseInt() is used because attr() is returning a string when it needs a number.
     const $selectedX = parseInt($(this).attr("data-rowIndex"));
     const $selectedY = parseInt($(this).attr("data-columnIndex"));
     const $selectedColor = $("input[name='palette']:checked").val();
@@ -335,6 +366,7 @@ colorBook.init = function() {
 
   });
 
+  // Draw the page onto the canvas when the user clicks on another page.
   $("input[name='page']").change(function() {
     const selectedPage = parseInt($(this).val());
     colorBook.assignPage(colorBook.pages[selectedPage]);
