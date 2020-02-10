@@ -1,0 +1,100 @@
+.canvasHolder{
+  display: flex;
+}
+
+.colorBook {
+  padding: 20px;
+}
+
+.canvas {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  height: 70vh;
+
+}
+
+.pixel {
+  border: 1px black solid;
+  width: calc(100%/37);
+  height: calc(100%/22);
+  /* min-height: 50px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pixel.notFilled {
+  background: #B6ADA6;
+}
+
+.palette {
+  width: 20%;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  text-align: center;
+
+}
+
+.colorLabel {
+  border: 2px black solid;
+  height: 7%;
+}
+
+.colorLabel:first-of-type {
+  color: #FFF;
+}
+
+.A {
+  background: #372727;
+}
+
+.B {
+  background: #FFF;
+}
+
+.C {
+  background: #FFD371;
+}
+
+.D {
+  background: #71FFAA;
+}
+
+.E {
+  background: #7181FF;
+}
+
+.F {
+  background: #F56958;
+}
+
+.G {
+  background: #FBD7C3;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.pages {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.page {
+  width: calc(80%/8);
+}
+
+input[name='palette'], input[name='page'] {
+  display: none;
+  /* visibility: hidden; */
+}
+
+input[name='palette']:checked + .colorLabel {
+  border: 2px turquoise solid;
+}
