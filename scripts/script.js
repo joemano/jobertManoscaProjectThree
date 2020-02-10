@@ -408,6 +408,7 @@ colorBook.init = function() {
   $("#a").prop("checked", true);
 
   // console.log(this.canvas);
+  let currentPage = parseInt($("input[name='page']:checked").val());
 
   // When a pixel is clicked, call the fill method using the selected indices.
   $(".pixel").click(function() {
@@ -436,7 +437,6 @@ colorBook.init = function() {
     if(successfulMatch) {
       if(colorBook.checkPageComplete()){
         alert("This image be done.");
-        const currentPage = parseInt($("input[name='page']:checked").val());
         colorBook.progress[currentPage].isCompleted = true;
         console.log(colorBook.progress);
       }
@@ -445,11 +445,17 @@ colorBook.init = function() {
   });
 
   // Draw the page onto the canvas when the user clicks on another page.
-  $("input[name='page']").change(function() {
+  $("input[name='page']").click(function() {
     const selectedPage = parseInt($(this).val());
-    // colorBook.assignPage(colorBook.pages[selectedPage]);
-    colorBook.canvas = colorBook.progress[selectedPage].page;
-    colorBook.redrawCanvas();
+    if(currentPage !== selectedPage){
+      if(selectedPage === 0 || colorBook.progress[selectedPage - 1].isCompleted){
+        colorBook.canvas = colorBook.progress[selectedPage].page;
+        colorBook.redrawCanvas();
+        currentPage = selectedPage;
+      } else {
+        alert(`You must complete Page ${selectedPage} before you can view this page.`);
+      }
+    }
   });
 };
 
