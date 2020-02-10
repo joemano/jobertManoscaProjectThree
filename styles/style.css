@@ -284,6 +284,10 @@ p {
           align-items: center;
 }
 
+.pixel p {
+  cursor: default;
+}
+
 .pixel.notFilled {
   background: #B6ADA6;
 }
@@ -354,6 +358,7 @@ p {
 }
 
 .page {
+  padding: 10px;
   width: calc(80%/8);
 }
 

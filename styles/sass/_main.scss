@@ -22,6 +22,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  p {
+    cursor: default;
+  }
 }
 
 .pixel.notFilled {
@@ -87,6 +91,7 @@
 }
 
 .page {
+  padding: 10px;
   width: calc(80%/8);
 }
 
