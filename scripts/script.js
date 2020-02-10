@@ -214,19 +214,48 @@ colorBook.pages = [
 
 ];
 
+// Array that holds the user's progress
+colorBook.progress = [];
+
 // Dimensions of the canvas
 colorBook.sizeX = 37;
 colorBook.sizeY = 22;
 
-// Pixel object contains vital information for the logic of the app
-colorBook.pixel = {
-  rowIndex: 0,
-  columnIndex: 0,
-  colorIndex: 0,
-  isFilled: true
+// Pixel contains vital information for the logic of the app
+class Pixel {
+  constructor(rowIndex = 0, columnIndex = 0, colorIndex = 0, isFilled = true){
+    this.rowIndex = rowIndex;
+    this.columnIndex = columnIndex;
+    this.colorIndex = colorIndex;
+    this.isFilled = isFilled;
+  }
 }
 
 // Build a canvas model for the app to work with.
+colorBook.buildColorBook = function() {
+  this.pages.forEach(function(page){
+    let pageArray = [];
+    for(let i = 0; i < colorBook.sizeY; i++) {
+      pageArray.push([]);
+      for(let j = 0; j < colorBook.sizeX; j++) {
+        if(page[i][j] === 'Z'){
+          pageArray[i].push(new Pixel(j, i, page[i][j], true));
+        } else {
+          pageArray[i].push(new Pixel(j, i, page[i][j], false));
+        }
+      }
+    }
+
+    const progressPage = {
+      page: pageArray.slice(),
+      isCompleted: false
+    };
+
+    colorBook.progress.push(Object.assign({}, progressPage));
+  });
+  console.log(this.progress);
+};
+
 colorBook.buildCanvas = function() {
   for(let i = 0; i < this.sizeY; i++) {
     // Y axis represents how many rows the canvas will have.
@@ -235,11 +264,11 @@ colorBook.buildCanvas = function() {
     for(let j = 0; j < this.sizeX; j++) {
       // X axis represents how many columns the canvas will have.
       // Here we assign a pixel to the row for every column the canvas has.
-      this.canvas[i].push(Object.assign({}, this.pixel));
-
+      // this.canvas[i].push(Object.assign({}, this.pixel));
+      this.canvas[i].push(new Pixel(j, i));
       // This assigns the position of each pixel as it goes through the loop.
-      this.canvas[i][j].rowIndex = j;
-      this.canvas[i][j].columnIndex = i;
+      // this.canvas[i][j].rowIndex = j;
+      // this.canvas[i][j].columnIndex = i;
     }
   }
 };
@@ -257,18 +286,37 @@ colorBook.drawCanvas = function() {
   $(".Z p").addClass("hidden");
 };
 
+// // This function is used to reassign indices to the interface whenever there's a change to the canvas model
+// colorBook.redrawCanvas = function() {
+//   colorBook.canvas.forEach(function(row) {
+//     row.forEach(function(pixel) {
+//       $(`.pixel[data-rowIndex=${pixel.rowIndex}][data-columnIndex=${pixel.columnIndex}]`).attr("class", "pixel").addClass(`${pixel.colorIndex} notFilled`).find("p").removeClass().text(`${pixel.colorIndex}`);
+//     })
+//   });
+
+//   // Again, hide the text for blank indices.
+//   $(".Z p").addClass("hidden");
+// };
+
 // This function is used to reassign indices to the interface whenever there's a change to the canvas model
 colorBook.redrawCanvas = function() {
   colorBook.canvas.forEach(function(row) {
     row.forEach(function(pixel) {
-      $(`.pixel[data-rowIndex=${pixel.rowIndex}][data-columnIndex=${pixel.columnIndex}]`).attr("class", "pixel").addClass(`${pixel.colorIndex} notFilled`).find("p").removeClass().text(`${pixel.colorIndex}`);
+      const $pixel = $(`.pixel[data-rowIndex=${pixel.rowIndex}][data-columnIndex=${pixel.columnIndex}]`);
+      $pixel.attr("class", "pixel").addClass(`${pixel.colorIndex}`).find("p").removeClass().text(`${pixel.colorIndex}`);
+      if(!pixel.isFilled || pixel.colorIndex === 'Z'){
+        $pixel.addClass("notFilled");
+      }
+
+      if(pixel.isFilled) {
+        $pixel.find("p").addClass("hidden");
+      }
     })
   });
 
   // Again, hide the text for blank indices.
   $(".Z p").addClass("hidden");
 };
-
 // Basic flood fill algorithm
 // colorBook.fill = function(x, y, colorToChange, newColor) {
 //   if(x < 0 || y < 0 || x >= colorBook.sizeX || y >= colorBook.sizeY) {
@@ -340,7 +388,16 @@ colorBook.assignPage = function(page) {
       }
     })
   });
-}
+};
+
+// Build the user's initial progress
+colorBook.buildInitProgress = function() {
+  this.pages.forEach(function(page) {
+    colorBook.assignPage(page);
+    colorBook.progress.push([...colorBook.canvas]);
+  });
+  console.log(this.progress);
+};
 
 // Check if all pixels on the canvas are filled.
 colorBook.checkPageComplete = function() {
@@ -359,21 +416,23 @@ colorBook.checkPageComplete = function() {
   if(numberOfFilled === (this.sizeX * this.sizeY)) {
     return true;
   }
-}
+};
 
 // Put everything together
 colorBook.init = function() {
-
+  this.buildColorBook();
   // Build the default canvas and draw it. Starts at the first page by default.
-  this.buildCanvas();
-  this.assignPage(this.pages[0]);
+  // this.buildCanvas();
+  // this.buildInitProgress();
+  // this.assignPage(this.pages[0]);
+  this.canvas = this.progress[0].page;
   this.drawCanvas();
 
   // This will make these radio buttons the default even after a refresh.
   $("#page1").prop("checked", true);
   $("#a").prop("checked", true);
 
-  console.log(this.canvas);
+  // console.log(this.canvas);
 
   // When a pixel is clicked, call the fill method using the selected indices.
   $(".pixel").click(function() {
@@ -404,7 +463,8 @@ colorBook.init = function() {
   // Draw the page onto the canvas when the user clicks on another page.
   $("input[name='page']").change(function() {
     const selectedPage = parseInt($(this).val());
-    colorBook.assignPage(colorBook.pages[selectedPage]);
+    // colorBook.assignPage(colorBook.pages[selectedPage]);
+    colorBook.canvas = colorBook.progress[selectedPage].page;
     colorBook.redrawCanvas();
   });
 };
