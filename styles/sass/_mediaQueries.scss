@@ -1,0 +1,34 @@
+@media only screen and (orientation:portrait){
+  body {
+    // width: 80vh;
+    
+    overflow-x: hidden;
+    
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: 100vw;
+      height: 100vh;
+
+      .container {
+        transform: rotateZ(90deg);
+        width: 100%;
+        min-width: 768px;
+        min-height: 380px;
+      }
+    }
+  }
+}
+
+@media only screen and (orientation:landscape) and (max-width: 768px){
+  body {
+    height: auto;
+    transform: none;
+
+    .container {
+      width: 100%;
+    }
+  }
+}
