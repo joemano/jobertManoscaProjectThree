@@ -7,6 +7,8 @@ main {
   .container {
     position: relative;
     padding-top: 42.75%;
+    min-width: 630px;
+    min-height: 320px;
   }
 
   .colorBook {
@@ -23,7 +25,7 @@ main {
 }
 
 .canvasHolder {
-  height: 100%;
+  height: 90%;
 }
 
 .canvas {
@@ -106,13 +108,18 @@ main {
 }
 
 .pages {
+  height: 10%;
   display: flex;
-  flex-wrap: wrap;
+  // flex-wrap: wrap;
 }
 
 .page {
   padding: 10px;
-  width: calc(80%/8);
+  height: 100%;
+  // width: calc(80%/8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 input[name='palette'], input[name='page'] {
