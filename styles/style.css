@@ -248,14 +248,41 @@ p {
   margin: 0;
 }
 
+.container {
+  width: 80%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
 .canvasHolder {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.colorBook {
+main .container {
+  position: relative;
+  padding-top: 42.75%;
+}
+
+main .colorBook {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   padding: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.canvasHolder {
+  height: 100%;
 }
 
 .canvas {
@@ -265,7 +292,6 @@ p {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   width: 80%;
-  height: 70vh;
 }
 
 .pixel {
@@ -369,4 +395,41 @@ input[name='palette'], input[name='page'] {
 
 input[name='palette']:checked + .colorLabel {
   border: 2px turquoise solid;
+}
+
+@media only screen and (orientation: portrait) {
+  body {
+    overflow-x: hidden;
+  }
+  body main {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 100vw;
+    height: 100vh;
+  }
+  body main .container {
+    -webkit-transform: rotateZ(90deg);
+            transform: rotateZ(90deg);
+    width: 100%;
+    min-width: 768px;
+    min-height: 380px;
+  }
+}
+
+@media only screen and (orientation: landscape) and (max-width: 768px) {
+  body {
+    height: auto;
+    -webkit-transform: none;
+            transform: none;
+  }
+  body .container {
+    width: 100%;
+  }
 }
