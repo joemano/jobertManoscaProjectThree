@@ -13,52 +13,106 @@
 
   </header>
   <main>
-    <div class="container">
-      <div class="colorBook">
-        <div class="pages">
-          <input type="radio" name="page" id="page1" value="0">
-          <label for="page1" class="page">Page 1</label>
-          <input type="radio" name="page" id="page2" value="1">
-          <label for="page2" class="page">Page 2</label>
-          <input type="radio" name="page" id="page3" value="2">
-          <label for="page3" class="page">Page 3</label>
-          <input type="radio" name="page" id="page4" value="3">
-          <label for="page4" class="page">Page 4</label>
-          <input type="radio" name="page" id="page5" value="4">
-          <label for="page5" class="page">Page 5</label>
-          <input type="radio" name="page" id="page6" value="5">
-          <label for="page6" class="page">Page 6</label>
-          <input type="radio" name="page" id="page7" value="6">
-          <label for="page7" class="page">Page 7</label>
-          <input type="radio" name="page" id="page8" value="7">
-          <label for="page8" class="page">Page 8</label>
-        </div>
-        <div class="canvasHolder">
-          <div class="canvas">
-            
-          </div>
-          <div class="palette">
-            <input type="radio" name="palette" id="a" value="A">
-            <label for="a" class="A colorLabel">A</label>
-            <input type="radio" name="palette" id="b" value="B">
-            <label for="b" class="B colorLabel">B</label>
-            <input type="radio" name="palette" id="c" value="C">
-            <label for="c" class="C colorLabel">C</label>
-            <input type="radio" name="palette" id="d" value="D">
-            <label for="d" class="D colorLabel">D</label>
-            <input type="radio" name="palette" id="e" value="E">
-            <label for="e" class="E colorLabel">E</label>
-            <input type="radio" name="palette" id="f" value="F">
-            <label for="f" class="F colorLabel">F</label>
-            <input type="radio" name="palette" id="g" value="G">
-            <label for="g" class="G colorLabel">G</label>
+    <section id="colorBookApp">
+      <div class="container">
+        <div class="colorBook">
+          <ol class="pages">
+            <li>
+              <input type="radio" name="page" id="page1" value="0">
+              <label for="page1" class="page">Page 1</label>
+            </li>
+            <li>
+              <input type="radio" name="page" id="page2" value="1">
+              <label for="page2" class="page">Page 2</label>
+            </li>
+            <li>
+              <input type="radio" name="page" id="page3" value="2">
+              <label for="page3" class="page">Page 3</label>
+            </li>
+            <li>
+              <input type="radio" name="page" id="page4" value="3">
+              <label for="page4" class="page">Page 4</label>
+            </li>
+            <li>
+              <input type="radio" name="page" id="page5" value="4">
+              <label for="page5" class="page">Page 5</label>
+            </li>
+            <li>
+              <input type="radio" name="page" id="page6" value="5">
+              <label for="page6" class="page">Page 6</label>
+            </li>
+            <li>
+              <input type="radio" name="page" id="page7" value="6">
+              <label for="page7" class="page">Page 7</label>
+            </li>
+            <li>
+              <input type="radio" name="page" id="page8" value="7">
+              <label for="page8" class="page">Page 8</label>
+            </li>
+          </ol>
+          <div class="canvasHolder">
+            <div class="canvas">
+              <!-- Pixels are placed here. -->
+            </div>
+            <div class="palette">
+              <input type="radio" name="palette" id="a" value="A">
+              <label for="a" class="A colorLabel">A</label>
+              <input type="radio" name="palette" id="b" value="B">
+              <label for="b" class="B colorLabel">B</label>
+              <input type="radio" name="palette" id="c" value="C">
+              <label for="c" class="C colorLabel">C</label>
+              <input type="radio" name="palette" id="d" value="D">
+              <label for="d" class="D colorLabel">D</label>
+              <input type="radio" name="palette" id="e" value="E">
+              <label for="e" class="E colorLabel">E</label>
+              <input type="radio" name="palette" id="f" value="F">
+              <label for="f" class="F colorLabel">F</label>
+              <input type="radio" name="palette" id="g" value="G">
+              <label for="g" class="G colorLabel">G</label>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   </main>
   <footer>
-    
+    <div class="container">
+        <div class="footerFlex">
+            <div class="storeButtons footFlexItem">
+                <div class="appStore" id="#appStoreBadge">
+                    <a href="https://itunes.apple.com/us/app/azur-lane/id1411126549?l=zh&ls=1&mt=8" target="_blank">
+                        <img src="assets/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" alt="App Store badge">
+                    </a>
+                </div>
+                <div class="playStore" id="#playStoreBadge">
+                    <a href="https://play.google.com/store/apps/details?id=com.YoStarEN.AzurLane" target="_blank">
+                        <img src="assets/google-play-badge.png" alt="Google Play Store badge.">
+                    </a>
+                </div>
+            </div>
+            <div class="externalLinksHolder footFlexItem">
+                <ul class="externalLinks">
+                    <li><a href="https://azurlane.yo-star.com/" target="_blank">Azur Lane</a></li>
+                    <li><a href="https://www.funimation.com/shows/azur-lane/" target="_blank">Azur Lane - The Animation</a></li>
+                    <li><a href="https://www.yo-star.com/" target="_blank">Yostar</a></li>
+                    <li><a href="https://twitter.com/M_uu418" target="_blank">Artist of the Cards</a></li>
+                </ul>
+            </div>
+            <div class="smLinksHolder footFlexItem">
+                <ul class="smLinks">
+                    <li><a href="https://www.facebook.com/AzurLaneEN/" target="_blank"><i class="fab fa-facebook"></i></a></li>
+                    <li><a href="https://twitter.com/AzurLane_EN" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="https://www.youtube.com/channel/UCPeJaqP6WgxUVDcpYkXZKMQ" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                    <li><a href="https://www.reddit.com/r/AzureLane/" target="_blank"><i class="fab fa-reddit"></i></a></li>
+                    <li><a href="https://www.twitch.tv/directory/game/Azur%20Lane" target="_blank"><i class="fab fa-twitch"></i></a></li>
+                    <li><a href="https://discord.gg/WYjqf7P" target="_blank"><i class="fab fa-discord"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+      <p>© 2018 Shanghai Manjuu Technology Co.,Ltd & Xiamen YongShi Technology Co.,Ltd. ©2018 Shanghai Yostar Co., Ltd. All rights reserved</p>
+    </div>
   </footer>
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
   <script src="scripts/script.js"></script>

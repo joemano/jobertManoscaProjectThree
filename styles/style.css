@@ -243,9 +243,27 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
-p {
-  padding: 0;
+h1, h2, h3, ul, ol, p {
   margin: 0;
+  padding: 0;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+h1, h2, h3 {
+  font-family: 'Lato', sans-serif;
+}
+
+a {
+  color: #f8f8f8;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: 100%;
 }
 
 .container {
@@ -263,6 +281,8 @@ p {
 main .container {
   position: relative;
   padding-top: 42.75%;
+  min-width: 630px;
+  min-height: 320px;
 }
 
 main .colorBook {
@@ -282,7 +302,7 @@ main .colorBook {
 }
 
 .canvasHolder {
-  height: 100%;
+  height: 90%;
 }
 
 .canvas {
@@ -376,16 +396,24 @@ main .colorBook {
 }
 
 .pages {
+  height: 10%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
 }
 
 .page {
   padding: 10px;
-  width: calc(80%/8);
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 input[name='palette'], input[name='page'] {
@@ -397,11 +425,127 @@ input[name='palette']:checked + .colorLabel {
   border: 2px turquoise solid;
 }
 
+footer {
+  background-color: #222c;
+  border-top: 2px #808080 solid;
+}
+
+.footerFlex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 25px 0;
+}
+
+.footFlexItem {
+  width: calc((100%/3) - 3%);
+}
+
+.storeButtons, .externalLinksHolder, .smLinksHolder {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.storeButtons {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.appStore, .playStore {
+  margin: 10px 0;
+}
+
+.playStore {
+  width: 50%;
+}
+
+.playStore img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  height: auto;
+}
+
+.appStore {
+  width: 50%;
+  height: auto;
+}
+
+.externalLinks {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.externalLinks li {
+  width: 100%;
+}
+
+.externalLinks a {
+  font-size: 2rem;
+  font-weight: 700;
+  display: inline-block;
+  width: 100%;
+  padding: 10px;
+}
+
+.smLinks {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.smLinks li {
+  width: calc(100%/3);
+  margin: 15px 0;
+}
+
+.smLinks a {
+  font-size: 4rem;
+}
+
+.smLinks a:hover, .smLinks .smLinks a:focus {
+  color: #36c;
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+}
+
+.copyright {
+  background-color: #000;
+  border-top: 2px #222 solid;
+  text-align: center;
+  padding: 10px 0;
+}
+
 @media only screen and (orientation: portrait) {
   body {
     overflow-x: hidden;
   }
   body main {
+    -webkit-transform: rotateZ(90deg);
+            transform: rotateZ(90deg);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -415,11 +559,7 @@ input[name='palette']:checked + .colorLabel {
     height: 100vh;
   }
   body main .container {
-    -webkit-transform: rotateZ(90deg);
-            transform: rotateZ(90deg);
     width: 100%;
-    min-width: 768px;
-    min-height: 380px;
   }
 }
 

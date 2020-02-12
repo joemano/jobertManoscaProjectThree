@@ -5,18 +5,16 @@
     overflow-x: hidden;
     
     main {
+      transform: rotateZ(90deg);
       display: flex;
       justify-content: center;
       align-items: center;
-
+      
       width: 100vw;
       height: 100vh;
 
       .container {
-        transform: rotateZ(90deg);
         width: 100%;
-        min-width: 768px;
-        min-height: 380px;
       }
     }
   }
