@@ -19,9 +19,6 @@
   text-align: center;
 }
 
-.azurLaneLogo, .developers, .disclaimer {
-  // height: calc(100%/3);
-}
 
 .akagi {
   width: 15%;
@@ -30,10 +27,10 @@
 
 .disclaimerText {
   position: relative;
-  background-color: #f8f8f8;
-  color: #000;
+  background-color: $backgroundSecondary;
+  color: $primaryText;
   padding: 20px;
-  border: 2px #000 solid;
+  border: 2px $backgroundPrimary solid;
   border-radius: 10px;
   width: 50%;
 }
@@ -50,7 +47,7 @@
   height: 0;
 
   /* use border properties to determine the size of the shape and where the shape is to be placed */
-  border-left: 10px solid #000;
+  border-left: 10px solid $backgroundPrimary;
   border-right: 10px solid transparent;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
@@ -67,7 +64,7 @@
   width: 0;
   height: 0;
 
-  border-left: 10px solid #fff;
+  border-left: 10px solid $backgroundSecondary;
   border-right: 10px solid transparent;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;

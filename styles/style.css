@@ -325,10 +325,10 @@ img {
 
 .disclaimerText {
   position: relative;
-  background-color: #f8f8f8;
-  color: #000;
+  background-color: #EDEB87;
+  color: #222;
   padding: 20px;
-  border: 2px #000 solid;
+  border: 2px #91241F solid;
   border-radius: 10px;
   width: 50%;
 }
@@ -344,7 +344,7 @@ img {
   width: 0;
   height: 0;
   /* use border properties to determine the size of the shape and where the shape is to be placed */
-  border-left: 10px solid #000;
+  border-left: 10px solid #91241F;
   border-right: 10px solid transparent;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
@@ -359,7 +359,7 @@ img {
   content: "";
   width: 0;
   height: 0;
-  border-left: 10px solid #fff;
+  border-left: 10px solid #EDEB87;
   border-right: 10px solid transparent;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
@@ -586,6 +586,12 @@ main .colorBook {
   height: 100%;
   border-radius: 4px 4px 0 0;
   border-right: none;
+}
+
+.page.locked {
+  background: #444;
+  -webkit-filter: brightness(40%);
+          filter: brightness(40%);
 }
 
 li:last-child .page {
@@ -871,5 +877,14 @@ footer {
 @media (max-width: 768px) {
   .container {
     width: 100%;
+  }
+  .instructHeader h2 {
+    font-size: 30px;
+    font-size: 3rem;
+    letter-spacing: normal;
+  }
+  .pixel p {
+    font-size: 10px;
+    font-size: 1rem;
   }
 }

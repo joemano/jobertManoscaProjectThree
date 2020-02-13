@@ -402,7 +402,7 @@ colorBook.init = function() {
   const $modal = $(".modal");
 
   // check if the window is tiny and wait for 2 seconds to fade the modal automatically
-  if($window.width() <= 470) {
+  if($window.width() <= 470 || $window.height() < 460) {
     setTimeout(function() {
       $modal.fadeOut();
     }, 2000);
@@ -435,8 +435,6 @@ colorBook.init = function() {
     const $selectedY = parseInt($(this).attr("data-columnIndex"));
     const $selectedColor = $("input[name='palette']:checked").val();
 
-    console.log($selectedX, $selectedY, $selectedColor);
-
     // Check if there is a successful match
     if(colorBook.canvas[$selectedY][$selectedX].colorIndex === $selectedColor && !colorBook.canvas[$selectedY][$selectedX].isFilled){
       successfulMatch = true;
@@ -453,7 +451,7 @@ colorBook.init = function() {
         const alertString = "We've successfully completed this page, Commander.";
         alert(alertString);
         colorBook.progress[currentPage].isCompleted = true;
-        console.log(colorBook.progress);
+        $(`input[name="page"][value=${currentPage + 1}] + .page`).removeClass("locked");
       }
     }
 

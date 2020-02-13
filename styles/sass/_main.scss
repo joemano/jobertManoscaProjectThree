@@ -135,6 +135,10 @@ main {
   border-right: none;
 }
 
+.page.locked {
+  background: $backgroundTertiary;
+  filter: brightness(40%);
+}
 
 li:last-child .page{
   border-right: 2px $borderDark solid;
