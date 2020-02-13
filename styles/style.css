@@ -479,7 +479,6 @@ main .colorBook {
 
 .canvasHolder {
   background-color: #EDEB87;
-  border-top: none;
   padding: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -589,7 +588,9 @@ main .colorBook {
   padding: 10px;
   height: 100%;
   border-radius: 4px 4px 0 0;
-  border-right: none;
+  border-left: none;
+  border-bottom: none;
+  position: relative;
 }
 
 .page.locked {
@@ -598,8 +599,8 @@ main .colorBook {
           filter: brightness(40%);
 }
 
-li:last-child .page {
-  border-right: 2px #808080 solid;
+li:first-child .page {
+  border-left: 2px #808080 solid;
 }
 
 label {
@@ -625,6 +626,15 @@ input[name='palette'], input[name='page'] {
 input[name='page']:checked + .page {
   font-weight: 700;
   border-bottom: none;
+}
+
+input[name='page']:checked + .page:after {
+  position: absolute;
+  content: "";
+  background: #EDEB87;
+  width: 100%;
+  height: 2px;
+  bottom: -2px;
 }
 
 input[name='palette']:checked + .colorLabel {
