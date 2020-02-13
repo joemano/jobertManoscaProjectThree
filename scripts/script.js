@@ -436,7 +436,8 @@ colorBook.init = function() {
     // I didn't wan't to call the check in there for obvious reasons.
     if(successfulMatch) {
       if(colorBook.checkPageComplete()){
-        alert("This image be done.");
+        const alertString = "We've successfully completed this page, Commander.";
+        alert(alertString);
         colorBook.progress[currentPage].isCompleted = true;
         console.log(colorBook.progress);
       }
@@ -448,12 +449,18 @@ colorBook.init = function() {
   $("input[name='page']").click(function() {
     const selectedPage = parseInt($(this).val());
     if(currentPage !== selectedPage){
+      // Check if the previous page is finished
       if(selectedPage === 0 || colorBook.progress[selectedPage - 1].isCompleted){
         colorBook.canvas = colorBook.progress[selectedPage].page;
         colorBook.redrawCanvas();
         currentPage = selectedPage;
       } else {
-        alert(`You must complete Page ${selectedPage} before you can view this page.`);
+        const alertString = `You must complete Page ${selectedPage} before you can view this page.`;
+
+        // Makes sure that the selected tab doesn't get checked anyway
+        $(`input[name='page'][value=${currentPage}]`).prop("checked", true);
+        
+        alert(alertString);
       }
     }
   });

@@ -3,17 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Oswald&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900|Raleway&display=swap" rel="stylesheet">
+  <link type="image/jpg" href="assets/manjuuFavicon.jpg" rel="icon">
   <script src="https://kit.fontawesome.com/4d7210d984.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="styles/style.css">
   <title>An Shan's Coloring Book</title>
 </head>
 <body>
+  <!-- <div class="modal">
+    <div class="azurLaneLogo">
+        <img src="assets/azurLaneEnglishLogo.png" alt="Logo of Azur Lane English servers.">
+    </div>
+    <div class="developers">
+      <div class="dev"><img src="yostarLogo.png" alt="Logo of Yostar, the publisher."></div>
+      <div class="dev"><img src="manjuuLogo.png" alt="Logo of Manjuu, one of the developers."></div>
+      <div class="dev"><img src="yongshiLogo.png" alt="Logo of Yongshi, one of the developers."></div>
+    </div>
+    <div class="disclaimer">
+        <p class="disclaimer_text">Greetings, Commander! It is my duty to inform you that Commander Jolo Dawg does not own any of the art used in this mini-game's recreation. All art respectfully belongs to Azur Lane, Yostar, Manjuu, Yongshi and the talented artists that made them. Please support the official release! If you don't... I'll have to get rid of some "pests". You may click/tap anywhere to begin.</p>
+        <div class="akagi">
+          <img src="assets/akagi.gif" alt="Animated sprite of Azur Lane's IJN Akagi.">
+        </div>
+    </div>
+  </div> -->
   <header>
-
+    <div class="container">
+      <div class="innerHeader">
+          <a href="index.html">
+              <div class="headerText">
+                  <h1>An Shan's Coloring Book</h1>
+                  <h2>Azur Lane's Lunar New Year mini-game</h2>
+              </div>
+          </a>
+          <nav>
+              <ul>
+                  <li><a href="#instructions">instructions</a></li>
+                  <li class="dropdown">
+                    <a href="#">other minis</a>
+                    <ul>
+                      <li><a href="http://www.jolodawg.com/memorylane/" target="_blank">memory lane</a></li>
+                    </ul>
+                  </li>
+              </ul>
+          </nav>
+      </div>
+  </div>
   </header>
   <main>
-    <section id="colorBookApp">
+    <section class="appSection">
       <div class="container">
         <div class="colorBook">
           <ol class="pages">
@@ -74,41 +111,60 @@
         </div>
       </div>
     </section>
+    <section id="instructions">
+      <div class="container">
+        <div class="instructionText">
+
+        </div>
+      </div>
+    </section>
   </main>
   <footer>
     <div class="container">
-        <div class="footerFlex">
-            <div class="storeButtons footFlexItem">
-                <div class="appStore" id="#appStoreBadge">
-                    <a href="https://itunes.apple.com/us/app/azur-lane/id1411126549?l=zh&ls=1&mt=8" target="_blank">
-                        <img src="assets/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" alt="App Store badge">
-                    </a>
-                </div>
-                <div class="playStore" id="#playStoreBadge">
-                    <a href="https://play.google.com/store/apps/details?id=com.YoStarEN.AzurLane" target="_blank">
-                        <img src="assets/google-play-badge.png" alt="Google Play Store badge.">
-                    </a>
-                </div>
-            </div>
-            <div class="externalLinksHolder footFlexItem">
-                <ul class="externalLinks">
-                    <li><a href="https://azurlane.yo-star.com/" target="_blank">Azur Lane</a></li>
-                    <li><a href="https://www.funimation.com/shows/azur-lane/" target="_blank">Azur Lane - The Animation</a></li>
-                    <li><a href="https://www.yo-star.com/" target="_blank">Yostar</a></li>
-                    <li><a href="https://twitter.com/M_uu418" target="_blank">Artist of the Cards</a></li>
-                </ul>
-            </div>
-            <div class="smLinksHolder footFlexItem">
-                <ul class="smLinks">
-                    <li><a href="https://www.facebook.com/AzurLaneEN/" target="_blank"><i class="fab fa-facebook"></i></a></li>
-                    <li><a href="https://twitter.com/AzurLane_EN" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                    <li><a href="https://www.youtube.com/channel/UCPeJaqP6WgxUVDcpYkXZKMQ" target="_blank"><i class="fab fa-youtube"></i></a></li>
-                    <li><a href="https://www.reddit.com/r/AzureLane/" target="_blank"><i class="fab fa-reddit"></i></a></li>
-                    <li><a href="https://www.twitch.tv/directory/game/Azur%20Lane" target="_blank"><i class="fab fa-twitch"></i></a></li>
-                    <li><a href="https://discord.gg/WYjqf7P" target="_blank"><i class="fab fa-discord"></i></a></li>
-                </ul>
-            </div>
+      <div class="footerFlex">
+        <div class="storeButtons footFlexItem">
+          <p>Download Azur Lane</p>
+          <div class="appStore" id="#appStoreBadge">
+            <a href="https://itunes.apple.com/us/app/azur-lane/id1411126549?l=zh&ls=1&mt=8" target="_blank">
+              <img src="assets/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" alt="App Store badge">
+            </a>
+          </div>
+          <div class="playStore" id="#playStoreBadge">
+            <a href="https://play.google.com/store/apps/details?id=com.YoStarEN.AzurLane" target="_blank">
+              <img src="assets/google-play-badge.png" alt="Google Play Store badge.">
+            </a>
+          </div>
         </div>
+        <div class="externalLinksHolder footFlexItem">
+          <ul class="externalLinks">
+            <li><a href="https://azurlane.yo-star.com/" target="_blank">Azur Lane</a></li>
+            <li><a href="https://www.funimation.com/shows/azur-lane/" target="_blank">Azur Lane - The Animation</a></li>
+            <li><a href="https://www.yo-star.com/" target="_blank">Yostar</a></li>
+          </ul>
+        </div>
+        <div class="smLinksHolder footFlexItem">
+          <ul class="smLinks">
+            <li>
+              <a href="https://www.facebook.com/AzurLaneEN/" target="_blank"><i class="fab fa-facebook"></i></a>
+            </li>
+            <li>
+              <a href="https://twitter.com/AzurLane_EN" target="_blank"><i class="fab fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/channel/UCPeJaqP6WgxUVDcpYkXZKMQ" target="_blank"><i class="fab fa-youtube"></i></a>
+            </li>
+            <li>
+              <a href="https://www.reddit.com/r/AzureLane/" target="_blank"><i class="fab fa-reddit"></i></a>
+            </li>
+            <li>
+              <a href="https://www.twitch.tv/directory/game/Azur%20Lane" target="_blank"><i class="fab fa-twitch"></i></a>
+            </li>
+            <li>
+              <a href="https://discord.gg/WYjqf7P" target="_blank"><i class="fab fa-discord"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="copyright">
       <p>© 2018 Shanghai Manjuu Technology Co.,Ltd & Xiamen YongShi Technology Co.,Ltd. ©2018 Shanghai Yostar Co., Ltd. All rights reserved</p>

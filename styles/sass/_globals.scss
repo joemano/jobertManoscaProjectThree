@@ -3,7 +3,14 @@ html {
 }
 
 body {
-  font-family: 'Lato', sans-serif;
+  background: linear-gradient(rgba($backgroundPrimary, 0.5), rgba($backgroundPrimary, 0.5)), url("../assets/background.png");
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+
+  font-family: $raleway;
+  @include fontSize(16);
+  color: $primaryText;
 }
 
 h1, h2, h3, ul, ol, p {
@@ -20,8 +27,12 @@ h1, h2, h3 {
 }
 
 a {
-  color: #f8f8f8;
+  color: $navText;
   text-decoration: none;
+
+  font-size: 2rem;
+  font-weight: 700;
+  transition: all 0.3s ease-in;
 }
 
 img {
