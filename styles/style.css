@@ -302,10 +302,6 @@ header {
           justify-content: space-between;
 }
 
-nav {
-  width: 50%;
-}
-
 nav ul {
   height: 100%;
   display: -webkit-box;
@@ -593,7 +589,7 @@ footer {
   width: calc((100%/3) - 3%);
 }
 
-.storeButtons, .externalLinksHolder, .smLinksHolder {
+.storeButtons, .buttonFlex, .externalLinksHolder, .smLinksHolder {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -607,7 +603,7 @@ footer {
           align-items: center;
 }
 
-.storeButtons {
+.storeButtons, .buttonFlex {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -744,6 +740,53 @@ footer {
 
 @media only screen and (orientation: landscape) and (max-width: 768px) {
   body .container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1000px) {
+  header {
+    text-align: center;
+  }
+  .innerHeader {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  nav ul {
+    display: none;
+  }
+  .footerFlex {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  .footFlexItem, .buttonFlex, .smLinks {
+    width: 100%;
+  }
+  .buttonFlex {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
+  .buttonFlex div {
+    padding: 20px;
+  }
+  .smLinks {
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
     width: 100%;
   }
 }

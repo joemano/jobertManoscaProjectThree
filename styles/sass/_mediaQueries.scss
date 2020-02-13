@@ -27,3 +27,46 @@
     }
   }
 }
+
+@media (max-width: 1000px) {
+  header {
+    text-align: center;
+  }
+
+  .innerHeader {
+    @include centerFlex();
+  }
+
+  nav {
+    ul {
+      display: none;
+    }
+  }
+
+  .footerFlex {
+    flex-wrap: wrap;
+  }
+
+  .footFlexItem, .buttonFlex, .smLinks{
+    width: 100%;
+  }
+
+  .buttonFlex {
+    flex-direction: row;
+    justify-content: space-around;
+
+    div {
+      padding: 20px;
+    }
+  }
+
+  .smLinks {
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px){
+  .container {
+    width: 100%;
+  }
+}

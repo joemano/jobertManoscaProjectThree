@@ -13,14 +13,14 @@ footer {
   width: calc((100%/3) - 3%);
 }
 
-.storeButtons, .externalLinksHolder, .smLinksHolder {
+.storeButtons, .buttonFlex, .externalLinksHolder, .smLinksHolder {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
 
-.storeButtons {
+.storeButtons, .buttonFlex {
   flex-direction: column;
 }
 
