@@ -19,10 +19,16 @@
   text-align: center;
 }
 
+// .azurLaneLogo, .developers, .disclaimer {
+//   height: calc(100%/3);
+// }
 
 .akagi {
   width: 15%;
   min-width: 100px;
+  img {
+    height: auto;
+  }
 }
 
 .disclaimerText {

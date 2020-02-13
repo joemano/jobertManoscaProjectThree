@@ -323,6 +323,10 @@ img {
   min-width: 100px;
 }
 
+.akagi img {
+  height: auto;
+}
+
 .disclaimerText {
   position: relative;
   background-color: #EDEB87;
