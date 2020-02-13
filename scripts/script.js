@@ -397,7 +397,22 @@ colorBook.checkPageComplete = function() {
 
 // Put everything together
 colorBook.init = function() {
-  
+  // cache window and the modal
+  const $window = $(window);
+  const $modal = $(".modal");
+
+  // check if the window is tiny and wait for 2 seconds to fade the modal automatically
+  if($window.width() <= 470) {
+    setTimeout(function() {
+      $modal.fadeOut();
+    }, 2000);
+  }
+
+  // Add event listener to the modal. Fades when clicked.
+  $modal.click(function() {
+    $(this).fadeOut();
+  });
+
   // Build the coloring book and draw the first page by default.
   this.buildColorBook();
   this.canvas = this.progress[0].page;
@@ -407,7 +422,6 @@ colorBook.init = function() {
   $("#page1").prop("checked", true);
   $("#a").prop("checked", true);
 
-  // console.log(this.canvas);
   let currentPage = parseInt($("input[name='page']:checked").val());
 
   // When a pixel is clicked, call the fill method using the selected indices.
