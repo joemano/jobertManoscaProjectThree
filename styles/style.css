@@ -240,7 +240,15 @@ html {
 }
 
 body {
-  font-family: 'Lato', sans-serif;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(199, 46, 38, 0.5)), to(rgba(199, 46, 38, 0.5))), url("../assets/background.png");
+  background: linear-gradient(rgba(199, 46, 38, 0.5), rgba(199, 46, 38, 0.5)), url("../assets/background.png");
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  font-family: "Raleway", sans-serif;
+  font-size: 16px;
+  font-size: 1.6rem;
+  color: #222;
 }
 
 h1, h2, h3, ul, ol, p {
@@ -272,13 +280,18 @@ img {
   margin: 0 auto;
 }
 
-.canvasHolder {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+header {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(70%, #C72E26), to(transparent));
+  background: linear-gradient(top, #C72E26 70%, transparent);
+  padding: 10px 0;
 }
 
-main .container {
+.innerHeader {
+  background: #EDEB87AA;
+  border: 5px #E4A436 ridge;
+}
+
+main .appSection .container {
   position: relative;
   padding-top: 42.75%;
   min-width: 630px;
@@ -286,6 +299,9 @@ main .container {
 }
 
 main .colorBook {
+  background: #EDEB87AA;
+  font-size: 12px;
+  font-size: 1.2rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -302,6 +318,9 @@ main .colorBook {
 }
 
 .canvasHolder {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   height: 90%;
 }
 
@@ -318,7 +337,6 @@ main .colorBook {
   border: 1px black solid;
   width: calc(100%/37);
   height: calc(100%/22);
-  /* min-height: 50px; */
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -332,6 +350,7 @@ main .colorBook {
 
 .pixel p {
   cursor: default;
+  font-family: "Lato", sans-serif;
 }
 
 .pixel.notFilled {
@@ -405,6 +424,9 @@ main .colorBook {
 .page {
   padding: 10px;
   height: 100%;
+}
+
+label {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -426,7 +448,7 @@ input[name='palette']:checked + .colorLabel {
 }
 
 footer {
-  background-color: #222c;
+  background-color: rgba(102, 102, 102, 0.8);
   border-top: 2px #808080 solid;
 }
 
@@ -526,8 +548,8 @@ footer {
   font-size: 4rem;
 }
 
-.smLinks a:hover, .smLinks .smLinks a:focus {
-  color: #36c;
+.smLinks a:hover, .smLinks a:focus {
+  color: #36C;
   -webkit-transition: all 0.3s ease-in;
   transition: all 0.3s ease-in;
 }
@@ -543,7 +565,7 @@ footer {
   body {
     overflow-x: hidden;
   }
-  body main {
+  body main .appSection {
     -webkit-transform: rotateZ(90deg);
             transform: rotateZ(90deg);
     display: -webkit-box;
@@ -564,11 +586,6 @@ footer {
 }
 
 @media only screen and (orientation: landscape) and (max-width: 768px) {
-  body {
-    height: auto;
-    -webkit-transform: none;
-            transform: none;
-  }
   body .container {
     width: 100%;
   }

@@ -1,5 +1,5 @@
 footer {
-  background-color: #222c;
+  background-color: rgba($backgroundTertiary, 0.8);
   border-top: 2px #808080 solid;
 }
 
@@ -75,8 +75,8 @@ footer {
     font-size: 4rem;
   }
 
-  a:hover, .smLinks a:focus {
-    color: #36c;
+  #{$aHoverFocus} {
+    color: $accentSecondary;
     transition: all 0.3s ease-in;
   }
 }

@@ -1,17 +1,17 @@
 @media only screen and (orientation:portrait){
   body {
-    // width: 80vh;
-    
     overflow-x: hidden;
     
     main {
-      transform: rotateZ(90deg);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      
-      width: 100vw;
-      height: 100vh;
+      .appSection {
+        transform: rotateZ(90deg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        width: 100vw;
+        height: 100vh;
+      }
 
       .container {
         width: 100%;
@@ -22,9 +22,6 @@
 
 @media only screen and (orientation:landscape) and (max-width: 768px){
   body {
-    height: auto;
-    transform: none;
-
     .container {
       width: 100%;
     }

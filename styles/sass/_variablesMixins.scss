@@ -1,0 +1,37 @@
+// Text colors
+$primaryText: #222;
+$navText: #F8F8F8;
+
+// Accent colors
+$accentPrimary: #E4A436;
+$accentSecondary: #36C;
+
+// Background colors
+$backgroundPrimary: #C72E26;
+$backgroundSecondary: #EDEB87AA;
+$backgroundTertiary: #666;
+$backgroundPixel: #B6ADA6;
+
+// Border colors
+$borderDark: #808080;
+$borderLight: #D3D3D3;
+
+//Hover and Focus
+$aHoverFocus: "a:hover, a:focus";
+
+//Fonts
+$lato: 'Lato', sans-serif;
+$raleway: 'Raleway', sans-serif;
+
+//Font sizing
+@mixin fontSize($sizeValue){
+	font-size: $sizeValue * 1px;
+	font-size: ($sizeValue/10) * 1rem;
+}
+
+//Flexbox centering
+@mixin centerFlex() {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

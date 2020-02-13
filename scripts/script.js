@@ -436,7 +436,8 @@ colorBook.init = function() {
     // I didn't wan't to call the check in there for obvious reasons.
     if(successfulMatch) {
       if(colorBook.checkPageComplete()){
-        alert("This image be done.");
+        const alertString = "We've successfully completed this page, Commander.";
+        alert(alertString);
         colorBook.progress[currentPage].isCompleted = true;
         console.log(colorBook.progress);
       }
@@ -453,7 +454,8 @@ colorBook.init = function() {
         colorBook.redrawCanvas();
         currentPage = selectedPage;
       } else {
-        alert(`You must complete Page ${selectedPage} before you can view this page.`);
+        const alertString = `You must complete Page ${selectedPage} before you can view this page.`;
+        alert(alertString);
       }
     }
   });

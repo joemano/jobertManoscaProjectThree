@@ -1,0 +1,11 @@
+header {
+  background: linear-gradient(top, $backgroundPrimary 70%, transparent);
+
+  padding: 10px 0;
+}
+
+.innerHeader {
+  background: $backgroundSecondary;
+
+  border: 5px $accentPrimary ridge;
+}

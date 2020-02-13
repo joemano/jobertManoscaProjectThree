@@ -3,7 +3,14 @@ html {
 }
 
 body {
-  font-family: 'Lato', sans-serif;
+  background: linear-gradient(rgba($backgroundPrimary, 0.5), rgba($backgroundPrimary, 0.5)), url("../assets/background.png");
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+
+  font-family: $raleway;
+  @include fontSize(16);
+  color: $primaryText;
 }
 
 h1, h2, h3, ul, ol, p {
