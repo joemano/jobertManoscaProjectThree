@@ -132,10 +132,20 @@ main {
   height: 100%;
 
   border-radius: 4px 4px 0 0;
+  border-right: none;
+}
+
+
+li:last-child .page{
+  border-right: 2px $borderDark solid;
 }
 
 label {
   @include centerFlex();
+
+  font-family: $lato;
+  @include fontSize(16);
+  text-transform: uppercase;
 }
 
 input[name='palette'], input[name='page'] {
@@ -143,9 +153,11 @@ input[name='palette'], input[name='page'] {
 }
 
 input[name='page']:checked + .page {
+  font-weight: 700;
+
   border-bottom: none;
 }
 
 input[name='palette']:checked + .colorLabel {
-  border: 2px turquoise solid;
+  border: 3px $accentPrimary solid;
 }
