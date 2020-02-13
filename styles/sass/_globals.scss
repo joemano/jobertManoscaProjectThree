@@ -13,6 +13,10 @@ body {
   color: $primaryText;
 }
 
+body:not(.isTabbing) .pixel:focus {
+  outline: none;
+}
+
 h1, h2, h3, ul, ol, p {
   margin: 0;
   padding: 0;

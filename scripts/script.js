@@ -270,17 +270,26 @@ colorBook.buildColorBook = function() {
   console.log(this.progress);
 };
 
+// Build the user's initial progress
+colorBook.buildInitProgress = function() {
+  this.pages.forEach(function(page) {
+    colorBook.assignPage(page);
+    colorBook.progress.push([...colorBook.canvas]);
+  });
+  console.log(this.progress);
+};
+
 // This function builds the bridge for the model and the interface that the user can see.
 colorBook.drawCanvas = function() {
   this.canvas.forEach(function(row) {
     row.forEach(function(pixel) {
       // Put the pixels on the canvas with their appropriate indices for position and color.
-      $(".canvas").append(`<div class="pixel ${pixel.colorIndex} notFilled" data-rowIndex=${pixel.rowIndex} data-columnIndex=${pixel.columnIndex}><p>${pixel.colorIndex}</p></div>`);
+      $(".canvas").append(`<div class="pixel ${pixel.colorIndex} notFilled" data-rowIndex=${pixel.rowIndex} data-columnIndex=${pixel.columnIndex} tabindex="0"><p>${pixel.colorIndex}</p></div>`);
     })
   });
 
   // This hides the text for pixels with a blank(represented as 'Z') color index.
-  $(".Z p").addClass("hidden");
+  $(".Z p").addClass("sr-only").text("blank");
 };
 
 // This function is used to reassign indices to the interface whenever there's a change to the canvas model
@@ -305,31 +314,6 @@ colorBook.redrawCanvas = function() {
     })
   });
 };
-// Basic flood fill algorithm
-// colorBook.fill = function(x, y, colorToChange, newColor) {
-//   if(x < 0 || y < 0 || x >= colorBook.sizeX || y >= colorBook.sizeY) {
-//     return;
-//   }
-
-//   if(this.canvas[y][x].colorIndex !== colorToChange || newColor === colorToChange){
-//     return;
-//   }
-
-//   this.canvas[y][x].colorIndex = newColor;
-//   const $selectedPixel = $(`.pixel[data-rowIndex=${x}][data-columnIndex=${y}]`);
-
-//   $selectedPixel.removeClass(colorToChange);
-//   $selectedPixel.addClass(this.canvas[y][x].colorIndex);
-
-//   this.fill(x - 1, y, colorToChange, newColor);
-//   this.fill(x - 1, y - 1, colorToChange, newColor);
-//   this.fill(x, y - 1, colorToChange, newColor);
-//   this.fill(x + 1, y - 1, colorToChange, newColor);
-//   this.fill(x + 1, y, colorToChange, newColor);
-//   this.fill(x + 1, y + 1, colorToChange, newColor);
-//   this.fill(x, y + 1, colorToChange, newColor);
-//   this.fill(x - 1, y + 1, colorToChange, newColor);
-// };
 
 // Modified flood fill algorithm  to better suit the functionality of the app
 colorBook.fill = function(x, y, selectedColor) {
@@ -353,23 +337,20 @@ colorBook.fill = function(x, y, selectedColor) {
   $selectedPixel.find("p").addClass("hidden");
 
   // Call the function again for adjacent pixels.
-  this.fill(x - 1, y, selectedColor);
-  this.fill(x - 1, y - 1, selectedColor);
-  this.fill(x, y - 1, selectedColor);
-  this.fill(x + 1, y - 1, selectedColor);
-  this.fill(x + 1, y, selectedColor);
-  this.fill(x + 1, y + 1, selectedColor);
-  this.fill(x, y + 1, selectedColor);
-  this.fill(x - 1, y + 1, selectedColor);
+  // Checks in 8 directions
+  this.fill(x - 1, y, selectedColor); // left
+  this.fill(x - 1, y - 1, selectedColor); // top left
+  this.fill(x, y - 1, selectedColor); // top
+  this.fill(x + 1, y - 1, selectedColor); // top right
+  this.fill(x + 1, y, selectedColor); // right
+  this.fill(x + 1, y + 1, selectedColor); // bottom right
+  this.fill(x, y + 1, selectedColor); // bottom
+  this.fill(x - 1, y + 1, selectedColor); // bottom left
 };
 
-// Build the user's initial progress
-colorBook.buildInitProgress = function() {
-  this.pages.forEach(function(page) {
-    colorBook.assignPage(page);
-    colorBook.progress.push([...colorBook.canvas]);
-  });
-  console.log(this.progress);
+// Check for matching colors
+colorBook.matchColor = function(x, y, color) {
+  
 };
 
 // Check if all pixels on the page are filled.
@@ -397,10 +378,12 @@ colorBook.checkPageComplete = function() {
 
 // Put everything together
 colorBook.init = function() {
-  // cache window and the modal
+  
+  // cached variables
   const $window = $(window);
   const $modal = $(".modal");
-
+  const $body = $("body");
+  
   // check if the window is tiny and wait for 2 seconds to fade the modal automatically
   if($window.width() <= 470 || $window.height() < 460) {
     setTimeout(function() {
@@ -423,6 +406,33 @@ colorBook.init = function() {
   $("#a").prop("checked", true);
 
   let currentPage = parseInt($("input[name='page']:checked").val());
+
+  ///////////////////////////////////////////////////////////
+  // A11Y check
+  //////////////////////////////////////////////////////////
+
+  // Run this function when user starts tabbing
+  const usingTab = function(e) {
+    if (e.keyCode === 9) {
+        $body.addClass("isTabbing");
+
+        $window.unbind("keydown", usingTab);
+        $window.bind("mousedown", usingMouse);
+    }
+  }
+
+  // Run this function when user goes back to the mouse
+  const usingMouse = function(e) {
+    $body.removeClass("isTabbing");
+    
+    $window.unbind("mousedown", usingMouse);
+    $window.bind("keydown", usingTab);
+  }
+
+  // Listen for tabs by default
+  $window.keydown(usingTab);
+
+  ////////////////////////////////////////////////////////////////
 
   // When a pixel is clicked, call the fill method using the selected indices.
   $(".pixel").click(function() {

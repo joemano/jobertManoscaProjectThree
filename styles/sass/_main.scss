@@ -18,6 +18,7 @@ main {
     flex-direction: column;
 
     padding: 10px;
+    border: 2px $borderDark ridge;
 
     position: absolute;
     top: 0;
@@ -50,6 +51,7 @@ main {
 
 .pixel {
   border: 1px black solid;
+
   width: calc(100%/37);
   height: calc(100%/22);
   display: flex;
@@ -60,6 +62,11 @@ main {
     cursor: default;
     font-family: $lato;
   }
+}
+
+.pixel:focus {
+  outline: 2px $accentPrimary solid;
+  z-index: 9;
 }
 
 .pixel.notFilled {
@@ -173,9 +180,10 @@ input[name='page']:checked + .page:after {
   background: $backgroundSecondary;
 
   width: 100%;
-  height: 2px;
+  height: 4px;
 
-  bottom: -2px;
+  top: 100%;
+  left: 0;
 }
 
 input[name='palette']:checked + .colorLabel {
