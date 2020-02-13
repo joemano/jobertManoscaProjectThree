@@ -506,6 +506,11 @@ main .colorBook {
   padding: 10px;
   height: 100%;
   border-radius: 4px 4px 0 0;
+  border-right: none;
+}
+
+li:last-child .page {
+  border-right: 2px #808080 solid;
 }
 
 label {
@@ -518,6 +523,10 @@ label {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  font-size: 1.6rem;
+  text-transform: uppercase;
 }
 
 input[name='palette'], input[name='page'] {
@@ -525,11 +534,44 @@ input[name='palette'], input[name='page'] {
 }
 
 input[name='page']:checked + .page {
+  font-weight: 700;
   border-bottom: none;
 }
 
 input[name='palette']:checked + .colorLabel {
-  border: 2px turquoise solid;
+  border: 3px #FF1F19 solid;
+}
+
+.instructionText {
+  background: #91241F;
+  padding: 10px;
+  margin: 50px 0;
+  border: 2px #808080 ridge;
+}
+
+.instructionText h2 {
+  background: #EDEB87;
+  font-size: 40px;
+  font-size: 4rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2rem;
+  border: 2px #D3D3D3 ridge;
+  padding: 10px;
+}
+
+.instructionText h3 {
+  font-size: 24px;
+  font-size: 2.4rem;
+  margin: 20px 0;
+}
+
+.instructionText ul, .instructionText strong {
+  color: #F8F8F8;
+}
+
+.instructionText li {
+  margin: 20px 0;
 }
 
 footer {
