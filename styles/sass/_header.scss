@@ -5,7 +5,7 @@ header {
 }
 
 .innerHeader {
-  background: $backgroundSecondary;
+  background: rgba($backgroundSecondary, 0.7);
 
   border: 5px $accentPrimary ridge;
 

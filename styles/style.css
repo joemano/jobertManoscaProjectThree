@@ -291,7 +291,7 @@ header {
 }
 
 .innerHeader {
-  background: #EDEB87AA;
+  background: rgba(237, 235, 135, 0.7);
   border: 5px #FF1F19 ridge;
   padding: 10px;
   display: -webkit-box;
@@ -372,7 +372,7 @@ main .appSection .container {
 }
 
 main .colorBook {
-  background: #EDEB87AA;
+  background: #91241F;
   font-size: 12px;
   font-size: 1.2rem;
   display: -webkit-box;
@@ -382,7 +382,7 @@ main .colorBook {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  padding: 20px;
+  padding: 10px;
   position: absolute;
   top: 0;
   left: 0;
@@ -390,7 +390,14 @@ main .colorBook {
   bottom: 0;
 }
 
+.canvasHolder, .page {
+  border: 2px #808080 solid;
+}
+
 .canvasHolder {
+  background-color: #EDEB87;
+  border-top: none;
+  padding: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -495,8 +502,10 @@ main .colorBook {
 }
 
 .page {
+  background: #EDEB87;
   padding: 10px;
   height: 100%;
+  border-radius: 4px 4px 0 0;
 }
 
 label {
@@ -513,7 +522,10 @@ label {
 
 input[name='palette'], input[name='page'] {
   display: none;
-  /* visibility: hidden; */
+}
+
+input[name='page']:checked + .page {
+  border-bottom: none;
 }
 
 input[name='palette']:checked + .colorLabel {
@@ -521,7 +533,7 @@ input[name='palette']:checked + .colorLabel {
 }
 
 footer {
-  background-color: rgba(102, 102, 102, 0.8);
+  background-color: rgba(68, 68, 68, 0.8);
   border-top: 2px #808080 solid;
 }
 

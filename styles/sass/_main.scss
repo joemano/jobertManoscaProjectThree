@@ -10,14 +10,14 @@ main {
   }
 
   .colorBook {
-    background: $backgroundSecondary;
+    background: $backgroundPrimary;
 
     @include fontSize(12);
 
     display: flex;
     flex-direction: column;
 
-    padding: 20px;
+    padding: 10px;
 
     position: absolute;
     top: 0;
@@ -27,7 +27,17 @@ main {
   }
 }
 
+.canvasHolder, .page {
+  border: 2px $borderDark solid;
+}
+
 .canvasHolder {
+  background-color: $backgroundSecondary;
+
+  border-top: none;
+
+  padding: 10px;
+
   display: flex;
   height: 90%;
 }
@@ -111,13 +121,17 @@ main {
 
 .pages {
   height: 10%;
+  
   display: flex;
-  // flex-wrap: wrap;
 }
 
 .page {
+  background: $backgroundSecondary;
+
   padding: 10px;
   height: 100%;
+
+  border-radius: 4px 4px 0 0;
 }
 
 label {
@@ -126,7 +140,10 @@ label {
 
 input[name='palette'], input[name='page'] {
   display: none;
-  /* visibility: hidden; */
+}
+
+input[name='page']:checked + .page {
+  border-bottom: none;
 }
 
 input[name='palette']:checked + .colorLabel {
