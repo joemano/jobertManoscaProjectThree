@@ -1,11 +1,68 @@
 header {
   background: linear-gradient(top, $backgroundPrimary 70%, transparent);
 
-  padding: 10px 0;
+  padding: 10px 0 5%;
 }
 
 .innerHeader {
   background: $backgroundSecondary;
 
   border: 5px $accentPrimary ridge;
+
+  padding: 10px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+nav {
+  width: 50%;
+  ul {
+    height: 100%;
+    @include centerFlex();
+
+    li {
+      margin: 0 5px;
+    }
+  }
+
+  a {
+    text-transform: uppercase;
+    padding: 10px 5px;
+
+    display: inline-block;
+  }
+
+  #{$aHoverFocus}{
+    background: $accentPrimary;
+  }
+}
+
+.dropdown {
+  position: relative;
+  
+  ul {
+    position: absolute;
+    visibility: hidden;
+
+    flex-direction: column;
+    
+    li {
+      background: $accentPrimary;
+      margin: 0;
+    }
+
+    a {
+      padding: 0 5px;
+    }
+
+    #{$aHoverFocus} {
+      background: $accentSecondary;
+    }
+  }
+}
+
+.dropdown:hover ul, .dropdown:focus-within {
+  visibility: visible;
+  background: $accentPrimary;
 }
