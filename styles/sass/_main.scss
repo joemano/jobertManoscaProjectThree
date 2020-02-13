@@ -161,3 +161,39 @@ input[name='page']:checked + .page {
 input[name='palette']:checked + .colorLabel {
   border: 3px $accentPrimary solid;
 }
+
+.instructionText {
+  background: $backgroundPrimary;
+
+  padding: 10px;
+  margin: 50px 0;
+
+  border: 2px $borderDark ridge;
+
+  h2 {
+    background: $backgroundSecondary;
+
+    @include fontSize(40);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2rem;
+
+    border: 2px $borderLight ridge;
+
+    padding: 10px;
+  }
+
+  h3 {
+    @include fontSize(24);
+    margin: 20px 0;
+  }
+
+  ul, strong{
+    // margin-top: 25px;
+    color: $navText;
+  }
+
+  li {
+    margin: 20px 0;
+  }
+}

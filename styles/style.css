@@ -542,6 +542,38 @@ input[name='palette']:checked + .colorLabel {
   border: 3px #FF1F19 solid;
 }
 
+.instructionText {
+  background: #91241F;
+  padding: 10px;
+  margin: 50px 0;
+  border: 2px #808080 ridge;
+}
+
+.instructionText h2 {
+  background: #EDEB87;
+  font-size: 40px;
+  font-size: 4rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2rem;
+  border: 2px #D3D3D3 ridge;
+  padding: 10px;
+}
+
+.instructionText h3 {
+  font-size: 24px;
+  font-size: 2.4rem;
+  margin: 20px 0;
+}
+
+.instructionText ul, .instructionText strong {
+  color: #F8F8F8;
+}
+
+.instructionText li {
+  margin: 20px 0;
+}
+
 footer {
   background-color: rgba(68, 68, 68, 0.8);
   border-top: 2px #808080 solid;
