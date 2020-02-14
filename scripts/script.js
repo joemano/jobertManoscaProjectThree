@@ -365,9 +365,9 @@ colorBook.matchColor = function(x, y, color, currentPage) {
   if(successfulMatch) {
     if(colorBook.checkPageComplete()){
       const alertString = "We've successfully completed this page, Commander.";
-      alert(alertString);
       colorBook.progress[currentPage].isCompleted = true;
       $(`input[name="page"][value=${currentPage + 1}] + .page`).removeClass("locked");
+      alert(alertString);
     }
   }
 };
