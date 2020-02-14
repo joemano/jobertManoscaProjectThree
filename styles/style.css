@@ -251,6 +251,11 @@ body {
   color: #222;
 }
 
+body:not(.isTabbing) .colorBook:focus,
+body:not(.isTabbing) .pixel:focus {
+  outline: none;
+}
+
 h1, h2, h3, ul, ol, p {
   margin: 0;
   padding: 0;
@@ -318,6 +323,19 @@ img {
   text-align: center;
 }
 
+.dev {
+  position: relative;
+  opacity: 0;
+}
+
+.dev:first-child {
+  left: -100%;
+}
+
+.dev:last-child {
+  left: 100%;
+}
+
 .akagi {
   width: 15%;
   min-width: 100px;
@@ -335,6 +353,7 @@ img {
   border: 2px #91241F solid;
   border-radius: 10px;
   width: 50%;
+  opacity: 0;
 }
 
 /* //////////////////// */
@@ -422,11 +441,13 @@ nav a:hover, nav a:focus {
 
 .dropdown ul {
   position: absolute;
-  visibility: hidden;
+  height: 0;
+  overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  background: #FF1F19;
 }
 
 .dropdown ul li {
@@ -442,9 +463,13 @@ nav a:hover, nav a:focus {
   background: #FCA353;
 }
 
-.dropdown:hover ul, .dropdown:focus-within {
-  visibility: visible;
+.dropdown:hover > a, .dropdown:focus-within {
   background: #FF1F19;
+}
+
+.dropdown:hover ul, .dropdown ul:focus-within {
+  height: auto;
+  overflow: visible;
 }
 
 main .appSection .container {
@@ -466,11 +491,16 @@ main .colorBook {
       -ms-flex-direction: column;
           flex-direction: column;
   padding: 10px;
+  border: 2px #808080 ridge;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+main .colorBook:focus {
+  outline: 10px #FCA353 solid;
 }
 
 .canvasHolder, .page {
@@ -479,7 +509,6 @@ main .colorBook {
 
 .canvasHolder {
   background-color: #EDEB87;
-  border-top: none;
   padding: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -514,6 +543,11 @@ main .colorBook {
 .pixel p {
   cursor: default;
   font-family: "Lato", sans-serif;
+}
+
+.pixel:focus {
+  outline: 2px #FF1F19 solid;
+  z-index: 9;
 }
 
 .pixel.notFilled {
@@ -589,7 +623,9 @@ main .colorBook {
   padding: 10px;
   height: 100%;
   border-radius: 4px 4px 0 0;
-  border-right: none;
+  border-left: none;
+  border-bottom: none;
+  position: relative;
 }
 
 .page.locked {
@@ -598,8 +634,8 @@ main .colorBook {
           filter: brightness(40%);
 }
 
-li:last-child .page {
-  border-right: 2px #808080 solid;
+li:first-child .page {
+  border-left: 2px #808080 solid;
 }
 
 label {
@@ -625,6 +661,16 @@ input[name='palette'], input[name='page'] {
 input[name='page']:checked + .page {
   font-weight: 700;
   border-bottom: none;
+}
+
+input[name='page']:checked + .page:after {
+  position: absolute;
+  content: "";
+  background: #EDEB87;
+  width: 100%;
+  height: 4px;
+  top: 100%;
+  left: 0;
 }
 
 input[name='palette']:checked + .colorLabel {
@@ -661,6 +707,16 @@ input[name='palette']:checked + .colorLabel {
 
 .instructionText li {
   margin: 20px 0;
+}
+
+.controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.controls ul {
+  margin: 0 20px;
 }
 
 footer {
@@ -890,5 +946,12 @@ footer {
   .pixel p {
     font-size: 10px;
     font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .disclaimerText, .dev:first-child, .dev:last-child, .dev {
+    left: 0;
+    opacity: 1;
   }
 }

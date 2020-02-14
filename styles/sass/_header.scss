@@ -16,7 +16,6 @@ header {
 }
 
 nav {
-  // width: 50%;
   ul {
     height: 100%;
     @include centerFlex();
@@ -43,9 +42,13 @@ nav {
   
   ul {
     position: absolute;
-    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+    
 
     flex-direction: column;
+
+    background: $accentPrimary;
     
     li {
       background: $accentPrimary;
@@ -62,7 +65,11 @@ nav {
   }
 }
 
-.dropdown:hover ul, .dropdown:focus-within {
-  visibility: visible;
+.dropdown:hover > a, .dropdown:focus-within {
   background: $accentPrimary;
+}
+
+.dropdown:hover ul, .dropdown ul:focus-within {
+  height: auto;
+  overflow: visible;
 }
