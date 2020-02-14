@@ -948,3 +948,10 @@ footer {
     font-size: 1rem;
   }
 }
+
+@media (max-width: 480px) {
+  .disclaimerText, .dev:first-child, .dev:last-child, .dev {
+    left: 0;
+    opacity: 1;
+  }
+}

@@ -406,6 +406,17 @@ colorBook.init = function() {
     setTimeout(function() {
       $modal.fadeOut();
     }, 2000);
+  } else {
+    // Playing around with jQuery animations
+    $(".azurLaneLogo").hide().fadeIn(2000);
+    $(".dev").animate(
+      {
+        left: 0,
+        opacity: 1
+      }, 2000, function() {
+        // wait for logos to pop before showing text
+        $(".disclaimerText").animate({opacity: 1});
+      });
   }
 
   // Add event listener to the modal. Fades when clicked.
@@ -413,16 +424,6 @@ colorBook.init = function() {
     $(this).fadeOut();
   });
 
-  // Playing around with jQuery animations
-  $(".azurLaneLogo").hide().fadeIn(2000);
-  $(".dev").animate(
-    {
-      left: 0,
-      opacity: 1
-    }, 2000, function() {
-      // wait for logos to pop before showing text
-      $(".disclaimerText").animate({opacity: 1});
-    });
   // Build the coloring book and draw the first page by default.
   this.buildColorBook();
   this.canvas = this.progress[0].page;
