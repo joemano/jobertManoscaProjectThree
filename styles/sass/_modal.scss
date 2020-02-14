@@ -18,10 +18,18 @@
   width: 100%;
   text-align: center;
 }
+.dev {
+  position: relative;
+  opacity: 0;
+}
 
-// .azurLaneLogo, .developers, .disclaimer {
-//   height: calc(100%/3);
-// }
+.dev:first-child {
+  left: -100%;
+}
+
+.dev:last-child {
+  left: 100%;
+}
 
 .akagi {
   width: 15%;
@@ -39,6 +47,7 @@
   border: 2px $backgroundPrimary solid;
   border-radius: 10px;
   width: 50%;
+  opacity: 0;
 }
 /* //////////////////// */
 /* Speech Bubble Magic */

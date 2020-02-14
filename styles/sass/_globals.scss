@@ -13,6 +13,7 @@ body {
   color: $primaryText;
 }
 
+body:not(.isTabbing) .colorBook:focus,
 body:not(.isTabbing) .pixel:focus {
   outline: none;
 }

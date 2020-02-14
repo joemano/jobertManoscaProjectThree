@@ -267,7 +267,6 @@ colorBook.buildColorBook = function() {
     // Add a copy of the object created to the global array
     colorBook.progress.push(Object.assign({}, progressPage));
   });
-  console.log(this.progress);
 };
 
 // Build the user's initial progress
@@ -276,7 +275,6 @@ colorBook.buildInitProgress = function() {
     colorBook.assignPage(page);
     colorBook.progress.push([...colorBook.canvas]);
   });
-  console.log(this.progress);
 };
 
 // This function builds the bridge for the model and the interface that the user can see.
@@ -284,7 +282,7 @@ colorBook.drawCanvas = function() {
   this.canvas.forEach(function(row) {
     row.forEach(function(pixel) {
       // Put the pixels on the canvas with their appropriate indices for position and color.
-      $(".canvas").append(`<div class="pixel ${pixel.colorIndex} notFilled" data-rowIndex=${pixel.rowIndex} data-columnIndex=${pixel.columnIndex} tabindex="0"><p>${pixel.colorIndex}</p></div>`);
+      $(".canvas").append(`<div class="pixel ${pixel.colorIndex} notFilled" data-rowIndex=${pixel.rowIndex} data-columnIndex=${pixel.columnIndex}><p>${pixel.colorIndex}</p></div>`);
     })
   });
 
@@ -349,8 +347,29 @@ colorBook.fill = function(x, y, selectedColor) {
 };
 
 // Check for matching colors
-colorBook.matchColor = function(x, y, color) {
+colorBook.matchColor = function(x, y, color, currentPage) {
+  // A boolean for the purpose of checking if the user successfully matched the colors
+  let successfulMatch = false;
   
+  // Check if there is a successful match
+  if(colorBook.canvas[y][x].colorIndex === color && !colorBook.canvas[y][x].isFilled){
+    successfulMatch = true;
+  }
+
+  // Attempt to fill the selected pixel with the selected color.
+  colorBook.fill(x, y, color);
+
+  // Only check for page completion when there's a successful match.
+  // Though there is a conditional in the recursive function for this check,
+  // I didn't wan't to call the check in there for obvious reasons.
+  if(successfulMatch) {
+    if(colorBook.checkPageComplete()){
+      const alertString = "We've successfully completed this page, Commander.";
+      alert(alertString);
+      colorBook.progress[currentPage].isCompleted = true;
+      $(`input[name="page"][value=${currentPage + 1}] + .page`).removeClass("locked");
+    }
+  }
 };
 
 // Check if all pixels on the page are filled.
@@ -367,8 +386,6 @@ colorBook.checkPageComplete = function() {
   const numberOfFilled = allFills.reduce(function(accumulator, currentValue) {
     return accumulator + currentValue;
   }, 0);
-
-  console.log(numberOfFilled, "out of " + (this.sizeX * this.sizeY));
 
   // Check if all the pixels are filled
   if(numberOfFilled === (this.sizeX * this.sizeY)) {
@@ -396,6 +413,16 @@ colorBook.init = function() {
     $(this).fadeOut();
   });
 
+  // Playing around with jQuery animations
+  $(".azurLaneLogo").hide().fadeIn(2000);
+  $(".dev").animate(
+    {
+      left: 0,
+      opacity: 1
+    }, 2000, function() {
+      // wait for logos to pop before showing text
+      $(".disclaimerText").animate({opacity: 1});
+    });
   // Build the coloring book and draw the first page by default.
   this.buildColorBook();
   this.canvas = this.progress[0].page;
@@ -411,13 +438,16 @@ colorBook.init = function() {
   // A11Y check
   //////////////////////////////////////////////////////////
 
+  const $colorBook = $(".colorBook");
+  const $pixel = $(".pixel");
+
   // Run this function when user starts tabbing
   const usingTab = function(e) {
-    if (e.keyCode === 9) {
-        $body.addClass("isTabbing");
+    if (e.keyCode === 9) { //tab
+      $body.addClass("isTabbing");
 
-        $window.unbind("keydown", usingTab);
-        $window.bind("mousedown", usingMouse);
+      $window.unbind("keydown", usingTab);
+      $window.bind("mousedown", usingMouse);
     }
   }
 
@@ -427,43 +457,127 @@ colorBook.init = function() {
     
     $window.unbind("mousedown", usingMouse);
     $window.bind("keydown", usingTab);
+
+    // Remove tab index from pixels and make the app container tab-able again
+    $pixel.removeAttr("tabindex");
+    $colorBook.attr("tabindex", 0);
   }
 
   // Listen for tabs by default
   $window.keydown(usingTab);
 
+  // Logic for keyboard controls
+  const usingKeys = function(e) {
+    // Pressing enter while focus is on the app will get rid of tabindex and put it on the pixels
+    if($colorBook.is(":focus") && e.keyCode === 13) {// enter
+      $colorBook.removeAttr("tabindex");
+      $pixel.attr("tabindex", 0);
+      // 0,0 is the default position of the cursor
+      $(".pixel[data-rowIndex=0][data-columnIndex=0]").focus();
+    }
+
+    if($pixel.is(":focus")) {
+      const $selectedX = parseInt($(":focus").attr("data-rowIndex"));
+      const $selectedY = parseInt($(":focus").attr("data-columnIndex"));
+      const $selectedColor = $("input[name='palette']:checked").val();
+      
+      switch (e.keyCode) {
+        case 13: //Enter
+          colorBook.matchColor($selectedX, $selectedY, $selectedColor, currentPage);
+          break;
+        case 87: // W
+          if($selectedY - 1 >= 0) {// Conditions like these prevent the focus ring from leaving the boundaries of the app
+            $(`.pixel[data-rowIndex=${$selectedX}][data-columnIndex=${$selectedY - 1}]`).focus();
+          }
+          break;
+        case 65: // A
+          if($selectedX - 1 >= 0) {
+            $(`.pixel[data-rowIndex=${$selectedX - 1}][data-columnIndex=${$selectedY}]`).focus();
+          }
+          break;
+        case 83: // S
+          if($selectedY + 1 < colorBook.sizeY) {
+            $(`.pixel[data-rowIndex=${$selectedX}][data-columnIndex=${$selectedY + 1}]`).focus();
+          }
+          break;
+        case 68: // D
+          if($selectedX + 1 < colorBook.sizeX) {
+            $(`.pixel[data-rowIndex=${$selectedX + 1}][data-columnIndex=${$selectedY}]`).focus();
+          }
+          break;
+        default:
+          break;
+      }
+    }
+
+    // Number keys 1 to 7 select the color
+    switch (e.keyCode) {
+      case 49:
+        $("#a").prop("checked", true);
+        break;
+      case 50:
+        $("#b").prop("checked", true);
+        break;
+      case 51:
+        $("#c").prop("checked", true);
+        break;
+      case 52:
+        $("#d").prop("checked", true);
+        break;
+      case 53:
+        $("#e").prop("checked", true);
+        break;
+      case 54:
+        $("#f").prop("checked", true);
+        break;
+      case 55:
+        $("#g").prop("checked", true);
+        break;
+        
+        // Left and Right arrows select the page
+      case 37: //Left arrow
+        if(currentPage > 0) {
+          currentPage--;
+          $(`input[name='page'][value=${currentPage}]`).prop("checked", true);
+          colorBook.canvas = colorBook.progress[currentPage].page;
+          colorBook.redrawCanvas();
+        }
+        break;
+      case 39: //Right arrow
+        if(currentPage + 1 < 8){
+          if(colorBook.progress[currentPage].isCompleted) {
+            currentPage++;
+            $(`input[name='page'][value=${currentPage}]`).prop("checked", true);
+            colorBook.canvas = colorBook.progress[currentPage].page;
+            colorBook.redrawCanvas();
+          } else {
+            const alertString = `You must complete Page ${currentPage + 1} before you can view this page.`;
+    
+            // Makes sure that the selected tab doesn't get checked anyway
+            $(`input[name='page'][value=${currentPage}]`).prop("checked", true);
+            
+            alert(alertString);
+          }
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
+  $(".colorBook").bind("keydown", usingKeys);
   ////////////////////////////////////////////////////////////////
 
   // When a pixel is clicked, call the fill method using the selected indices.
   $(".pixel").click(function() {
 
-    // A boolean for the purpose of checking if the user successfully matched the colors
-    let successfulMatch = false;
-
+    
     // parseInt() is used because attr() is returning a string when it needs a number.
     const $selectedX = parseInt($(this).attr("data-rowIndex"));
     const $selectedY = parseInt($(this).attr("data-columnIndex"));
     const $selectedColor = $("input[name='palette']:checked").val();
-
-    // Check if there is a successful match
-    if(colorBook.canvas[$selectedY][$selectedX].colorIndex === $selectedColor && !colorBook.canvas[$selectedY][$selectedX].isFilled){
-      successfulMatch = true;
-    }
-
-    // Attempt to fill the selected pixel with the selected color.
-    colorBook.fill($selectedX, $selectedY, $selectedColor);
-
-    // Only check for page completion when there's a successful match.
-    // Though there is a conditional in the recursive function for this check,
-    // I didn't wan't to call the check in there for obvious reasons.
-    if(successfulMatch) {
-      if(colorBook.checkPageComplete()){
-        const alertString = "We've successfully completed this page, Commander.";
-        alert(alertString);
-        colorBook.progress[currentPage].isCompleted = true;
-        $(`input[name="page"][value=${currentPage + 1}] + .page`).removeClass("locked");
-      }
-    }
+    
+    colorBook.matchColor($selectedX, $selectedY, $selectedColor, currentPage);
 
   });
 

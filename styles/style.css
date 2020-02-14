@@ -251,6 +251,7 @@ body {
   color: #222;
 }
 
+body:not(.isTabbing) .colorBook:focus,
 body:not(.isTabbing) .pixel:focus {
   outline: none;
 }
@@ -322,6 +323,19 @@ img {
   text-align: center;
 }
 
+.dev {
+  position: relative;
+  opacity: 0;
+}
+
+.dev:first-child {
+  left: -100%;
+}
+
+.dev:last-child {
+  left: 100%;
+}
+
 .akagi {
   width: 15%;
   min-width: 100px;
@@ -339,6 +353,7 @@ img {
   border: 2px #91241F solid;
   border-radius: 10px;
   width: 50%;
+  opacity: 0;
 }
 
 /* //////////////////// */
@@ -426,7 +441,8 @@ nav a:hover, nav a:focus {
 
 .dropdown ul {
   position: absolute;
-  opacity: 0;
+  height: 0;
+  overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -452,7 +468,8 @@ nav a:hover, nav a:focus {
 }
 
 .dropdown:hover ul, .dropdown ul:focus-within {
-  opacity: 1;
+  height: auto;
+  overflow: visible;
 }
 
 main .appSection .container {
@@ -480,6 +497,10 @@ main .colorBook {
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+main .colorBook:focus {
+  outline: 10px #FCA353 solid;
 }
 
 .canvasHolder, .page {
@@ -686,6 +707,16 @@ input[name='palette']:checked + .colorLabel {
 
 .instructionText li {
   margin: 20px 0;
+}
+
+.controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.controls ul {
+  margin: 0 20px;
 }
 
 footer {
