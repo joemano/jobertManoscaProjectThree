@@ -46,7 +46,7 @@
   .footerFlex {
     flex-wrap: wrap;
   }
-
+  // Stack footer elements on top of each other
   .footFlexItem, .buttonFlex, .smLinks{
     width: 100%;
   }
@@ -85,6 +85,7 @@
 }
 
 @media (max-width: 480px){
+  // Put logos back on screen for this size
   .disclaimerText, .dev:first-child, .dev:last-child, .dev {
     left: 0;
     opacity: 1;
